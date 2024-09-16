@@ -23,28 +23,28 @@ public class HW_2_lection{
     }
 
     public static void Exe_1 (){
-        Scanner in = new Scanner (System.in);
+        Scanner in = new Scanner(System.in);
         float n = in.nextFloat();
         System.out.println(Math.round(n));
 
     }
 
     public static void Exe_2(){
-        Scanner in = new Scanner (System.in);
+        Scanner in = new Scanner(System.in);
         double dollar = in.nextDouble();
         double sterling = dollar/1.487, frank = dollar/0.172, mark = dollar/0.584, ena = dollar/0.00955;
         System.out.printf("Result:\n %.2f funt;\n %.2f frank;\n %.2f German mark;\n %.2f ena", sterling, frank, mark, ena);
     }
 
     public static void Exe_3(){
-        Scanner in = new Scanner (System.in);
+        Scanner in = new Scanner(System.in);
         float tempreture = in.nextFloat();
 
         System.out.println(tempreture * 9 /5 + 32);
     }
 
     public static void Exe_4(){
-        Scanner in = new Scanner (System.in);
+        Scanner in = new Scanner(System.in);
         float income = in.nextFloat();
         int year = in.nextInt();
         float rate = in.nextFloat();
@@ -65,17 +65,18 @@ public class HW_2_lection{
     }
 
     public static void Exe_6(){
-        Scanner in = new Scanner (System.in);
+        Scanner in = new Scanner(System.in);
         int n = in.nextInt();
         if (n%2 == 0){
             System.out.println("Yes");
-        }else{ 
+        }
+        else{ 
             System.out.println("No");
         }
     }
 
     public static void Exe_7(){
-        Scanner in = new Scanner (System.in);
+        Scanner in = new Scanner(System.in);
         int n = in.nextInt();
         int ticket_60, ticket_20, ticket_10, ticket_5, ticket_1; 
         ticket_60 = n/60;
@@ -110,7 +111,7 @@ public class HW_2_lection{
     }
 
     public static void Exe_8(){
-        Scanner in = new Scanner (System.in);
+        Scanner in = new Scanner(System.in);
         int a = in.nextInt();
         int b = in.nextInt();
 
@@ -126,8 +127,8 @@ public class HW_2_lection{
                 System.out.println("NO");
     }  
 
-    public static void Exe_9() {
-        Scanner in = new Scanner (System.in);
+    public static void Exe_9(){
+        Scanner in = new Scanner(System.in);
         int n = in.nextInt();
         int result = 1;
         for (int i = 1; i <= n; i++ )
@@ -135,8 +136,8 @@ public class HW_2_lection{
         System.out.println(result);    
     }
 
-    public static void Exe_10() {
-        Scanner in = new Scanner (System.in);
+    public static void Exe_10(){
+        Scanner in = new Scanner(System.in);
         int n = in.nextInt();
         int count = 0;
         while(n > 0){
@@ -146,8 +147,8 @@ public class HW_2_lection{
         System.out.println(count);
     }
 
-    public static void Exe_11() {
-        Scanner in = new Scanner (System.in);
+    public static void Exe_11(){
+        Scanner in = new Scanner(System.in);
         int a = in.nextInt();
         int b = in.nextInt();
 
@@ -163,8 +164,8 @@ public class HW_2_lection{
         }
     }
 
-    public static void Exe_12() {
-        Scanner in = new Scanner (System.in);
+    public static void Exe_12(){
+        Scanner in = new Scanner(System.in);
         int a = in.nextInt();
         int b = in.nextInt();
         if (a > b)
@@ -173,8 +174,8 @@ public class HW_2_lection{
             System.out.println(b);
     }
 
-    public static void Exe_13() {
-        Scanner in = new Scanner (System.in);
+    public static void Exe_13(){
+        Scanner in = new Scanner(System.in);
         int year = in.nextInt();
         if ((year%4 == 0 && year%100 != 0) || year%400 == 0)
             System.out.println("Yes");
@@ -182,8 +183,8 @@ public class HW_2_lection{
             System.out.println("No");
     }
     
-    public static void Exe_14() {
-        Scanner in = new Scanner (System.in);
+    public static void Exe_14(){
+        Scanner in = new Scanner(System.in);
         int number = in.nextInt();
         if (number > 0)
             System.out.println(1);
@@ -193,8 +194,8 @@ public class HW_2_lection{
             System.out.println(0); 
     }
 
-    public static void Exe_15() {
-        Scanner in = new Scanner (System.in);
+    public static void Exe_15(){
+        Scanner in = new Scanner(System.in);
         int rub = in.nextInt();
         int pennies = in.nextInt();
         int price = rub*10 + pennies;
@@ -208,8 +209,8 @@ public class HW_2_lection{
             System.out.println((price - incom)/10 + " " + (price-incom)%10);
     }
 
-    public static void Exe_16() {
-        Scanner in = new Scanner (System.in);
+    public static void Exe_16(){
+        Scanner in = new Scanner(System.in);
         int ice_balls = in.nextInt();
         for (int i = 0; i <= ice_balls / 5; i++) {
             if ((ice_balls - i * 5) % 3 == 0) {
@@ -217,7 +218,6 @@ public class HW_2_lection{
             }
         }
         System.out.println("No");
-        
     }
 
 }
