@@ -1,7 +1,21 @@
-public class Laba_4 {
 
+import java.util.Scanner;
+
+public class Laba_4 {
   public static void main(String[] args) {
-    catDog("catdog");
+
+    Scanner in = new Scanner(System.in);
+    String [] words = in.nextLine().split(" ");
+    for (String word: words){
+      boolean flag = false;
+      for(char chr: word.toCharArray()){
+        if(!Character.isAlphabetic(chr)) flag = true;
+      }
+      if (flag) System.out.println(word);
+    }
+
+    in.close();
+    
   }
 
   public String doubleChar(String str) {
@@ -28,21 +42,22 @@ public class Laba_4 {
   public boolean catDog(String str) {
     return count("dog", str) == count("cat", str);
   }
+  
 
-public int countCode(String str) {
-  int count = 0;
+  public int countCode(String str) {
+    int count = 0;
   
-  if (str.length() < 4)
-    return 0;
+    if (str.length() < 4)
+      return 0;
   
-  for (int i = 0; i < str.length() - 3; i++) {
-    if (str.substring(i,i+2).compareTo("co") == 0 && str.substring(i+3, i+4).compareTo("e") == 0)
-      count++;
+    for (int i = 0; i < str.length() - 3; i++) {
+      if (str.substring(i,i+2).compareTo("co") == 0 && str.substring(i+3, i+4).compareTo("e") == 0)
+        count++;
+    }
+    return count;
   }
-  return count;
-}
 
-public boolean endOther(String a, String b) {
+  public boolean endOther(String a, String b) {
   
   int aLen = a.length();
   int bLen = b.length();
@@ -58,35 +73,34 @@ public boolean endOther(String a, String b) {
       return true;
     else
       return false;
-  }
+  }}
   
   public Boolean xyzThere(String str) {
-  int len = str.length();
-  String xyz = "xyz";
+    int len = str.length();
+    String xyz = "xyz";
   
-  Boolean match = false;
+    Boolean match = false;
 
-  if (len < 3)
-    return false;
+    if (len < 3)
+      return false;
 
-  for (int i = 0; i < len - 2; i ++) {
-    String temp = str.substring(i, i+3); 
-    if (temp.compareTo(xyz) == 0 && i == 0)
-      match = true;
-    else if(temp.compareTo(xyz) == 0 && str.charAt(i-1) != 46)
-      match = true;
-      
-  }  
-  return match;
-}
-
-public boolean bobThere(String str) {
-  int len = str.length();
-  
-  for (int i = 0; i < len - 2; i++) {
-    if (str.charAt(i) == 'b' && str.charAt(i+2) == 'b')
-    return true;
+    for (int i = 0; i < len - 2; i ++) {
+      String temp = str.substring(i, i+3); 
+      if (temp.compareTo(xyz) == 0 && i == 0)
+        match = true;
+      else if(temp.compareTo(xyz) == 0 && str.charAt(i-1) != 46)
+        match = true;  
+      }  
+    return match;
   }
-  return false;
-}
+
+  public boolean bobThere(String str) {
+    int len = str.length();
+  
+    for (int i = 0; i < len - 2; i++) {
+      if (str.charAt(i) == 'b' && str.charAt(i+2) == 'b')
+      return true;
+    }
+    return false;
+  }
 }
