@@ -9,7 +9,7 @@ let fft;
 
 function preload() {
     soundFormats("mp3", "wav");
-    sound = loadSound("assets/Sound1.mp3", () => {
+    sound = loadSound("assets/Sound2.mp3", () => {
         console.log("sound is loaded!");
         isLoaded = true;
     });
@@ -86,7 +86,7 @@ function keyPressed() {
         isInitialised = true;
         sound.setVolume(0.2);
 
-        let r = map(mouseX, 0, width, 0.5, 4.0);
+        let r = map(mouseX, 0, width, 0.5, 1.5);
         if (isLoaded) {
             sound.loop(0, r);
         }
