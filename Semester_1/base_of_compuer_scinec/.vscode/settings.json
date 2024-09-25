@@ -1,0 +1,10 @@
+{
+    "editor.defaultFormatter": "Oracle.oracle-java",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "workbench.editor.labelFormat": "short",
+    "notebook.defaultFormatter": "Oracle.oracle-java",
+    "notebook.formatOnSave.enabled": true,
+    "notebook.formatOnCellExecution": true
+}
