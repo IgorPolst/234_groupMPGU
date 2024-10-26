@@ -11,7 +11,7 @@ function preload() {
 function setup() {
     createCanvas(2000, 2000);
     const cities = studentData.getColumn("homeCity");
-    myPie = new PieChart(500, 500, 400);
+    myPie = new PieChart(500, 300, 400);
     countCities(cities);
     console.log(cityCount);
     
@@ -19,7 +19,7 @@ function setup() {
 
 function draw() {
     noLoop();
-    myPie.draw(Object.values(cityCount),Object.keys(cityCount),createColors(Object.values(cityCount).length),"Home City" );
+    myPie.draw(Object.values(cityCount),Object.keys(cityCount),createColors(Object.values(cityCount).length),"Cities of residence" );
 }
 
 function createColors(numCol){
