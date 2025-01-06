@@ -14,6 +14,11 @@ public class Laba_8 {
         storkeeper.getSettled();
         boss.getSettled();
 
+        System.out.println("Начало работы!\n");
+        salesman.getInfo();
+        storkeeper.getInfo();
+        boss.getInfo();
+
         for (int i = 0; i < 3; i++) {
             salesman.work();
             storkeeper.work();
@@ -24,17 +29,25 @@ public class Laba_8 {
         }
 
         storkeeper.toSleep();
-        for(int i = 0; i < 5; i ++){
-            storkeeper.work();
+
+        for (int i = 0; i < 5; i++) {
             storkeeper.work();
             storkeeper.toRest();
         }
 
         salesman.goHome();
+        storkeeper.goHome();
+        boss.goHome();
+
         salesman.toSleep();
+        storkeeper.toSleep();
+        boss.toSleep();
+
         salesman.goWork();
+        storkeeper.goWork();
+        boss.goWork();
 
-
+        System.out.println("\n\n2 Рабочий день.\n");
         salesman.getInfo();
         storkeeper.getInfo();
         boss.getInfo();
