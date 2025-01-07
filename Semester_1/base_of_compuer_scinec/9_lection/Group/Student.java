@@ -7,8 +7,11 @@ public class Student {
     int age;
     int number;
 
-    public Student(String name) {
-        this.name = name;
+    public Student(int number) {
+        this.name = "Боб";
+        this.surname = "Бобович";
+        this.age = 17;
+        this.number = number;
     }
 
     public Student(String name, String surname, int age, int number) {

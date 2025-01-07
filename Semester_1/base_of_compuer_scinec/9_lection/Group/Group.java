@@ -8,7 +8,36 @@ public class Group {
     private int minSize;
     private List<Student> group;
 
-    public void addStudent(Student student) {
+    public Group() {
+        this.maxSize = 15;
+        this.minSize = 3;
+        this.group = new ArrayList<Student>();
+    }
+
+    public static Student generateStudent(boolean avtomatic, int num) {
+        Student def;
+
+        if (avtomatic) {
+            def = new Student(num);
+
+        } else {
+            String name, surname;
+            int age;
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Введите имя: ");
+            name = sc.nextLine();
+            System.out.println("Введите фамилию: ");
+            surname = sc.nextLine();
+            System.out.println("Введите возраст: ");
+            age = sc.nextInt();
+
+            
+            def = new Student(name, surname, age, num);
+        }
+        return def;
+    }
+
+    public void addStudent(Student student, int num) {
         try {
 
             if (group.size() >= maxSize) {
@@ -18,15 +47,17 @@ public class Group {
             }
 
             for (Student s : group) {
-                if (s.getName().equals(student.getName())) {
-                    throw new IllegalArgumentException("Cannot add student: student " + student.getName() + " already exists in the group.");
+                if (s.getNumber() == student.getNumber()) {
+                    throw new IllegalStateException("Cannot add student: student " + student.getNumber() + " already exists in the group.");
                 }
             }
 
             group.add(student);
             System.out.println("Student " + student.getName() + " added to the group.");
+
         } catch (IllegalStateException e) {
             System.err.println(e.getMessage());
+            num--;
         }
 
     }
@@ -34,25 +65,35 @@ public class Group {
     public void removeStudent(Student student) {
         try {
             if (group.size() <= minSize) {
-                throw new IllegalStateException("Cannot add student: group is empty.");
+                throw new IllegalStateException("Cannot remove student: group is empty.");
             }
+
+            boolean studentFound = false;
             for (Student s : group) {
                 if (s.getName().equals(student.getName())) {
-                    throw new IllegalArgumentException("Cannot add student: student " + student.getName() + " already exists in the group.");
+                    studentFound = true;
+                    break;
                 }
+            }
+
+            if (!studentFound) {
+                throw new IllegalStateException("Cannot remove student: student " + student.getName() + " is not in the group.");
             }
 
             group.remove(student);
             System.out.println("Student " + student.getName() + " removed from the group.");
         } catch (IllegalStateException e) {
+
             System.err.println(e.getMessage());
         }
     }
 
-    public Group() {
-        this.maxSize = 15;
-        this.minSize = 3;
-        this.group = new ArrayList<Student>();
+    public void getInfo(){
+        System.out.println("Имя         Фамилия     Возраст Номер");
+        for(Student s : this.group){
+            System.out.printf("%-11s %-11s %-7d %-2d\n", s.getName(), s.getSurname(), s.getAge(), s.getNumber());
+        }
     }
+
 
 }
