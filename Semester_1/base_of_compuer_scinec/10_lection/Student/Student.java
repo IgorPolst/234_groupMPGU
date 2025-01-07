@@ -1,0 +1,125 @@
+package Student;
+
+public class Student {
+
+    String midleName;
+    String name;
+    String surname;
+    String gender;
+    int age;
+    double averageScore;
+    int Scholarship;
+    int attendedClasses;
+    int missedClasses;
+
+    public Student(String midleName, String name, String surname, String gender, int age, double averageScore, int Scholarship, int attendedClasses, int missedClasses) {
+        this.Scholarship = Scholarship;
+        this.age = age;
+        this.attendedClasses = attendedClasses;
+        this.averageScore = averageScore;
+        this.gender = gender;
+        this.midleName = midleName;
+        this.missedClasses = missedClasses;
+        this.name = name;
+        this.surname = surname;
+    }
+
+    public Student() {
+        this.Scholarship = 2700;
+        this.age = 18;
+        this.attendedClasses = 0;
+        this.averageScore = 5.4;
+        this.gender = "male";
+        this.midleName = "Stevenson";
+        this.missedClasses = 0;
+        this.name = "Bob";
+        this.surname = "Steve";
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Student{");
+        sb.append("midleName=").append(midleName);
+        sb.append(", name=").append(name);
+        sb.append(", surname=").append(surname);
+        sb.append(", gender=").append(gender);
+        sb.append(", age=").append(age);
+        sb.append(", averageScore=").append(averageScore);
+        sb.append(", Scholarship=").append(Scholarship);
+        sb.append(", attendedClasses=").append(attendedClasses);
+        sb.append(", missedClasses=").append(missedClasses);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    public String getMidleName() {
+        return midleName;
+    }
+
+    public void setMidleName(String midleName) {
+        this.midleName = midleName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public double getAverageScore() {
+        return averageScore;
+    }
+
+    public void setAverageScore(double averageScore) {
+        this.averageScore = averageScore;
+    }
+
+    public int getScholarship() {
+        return Scholarship;
+    }
+
+    public void setScholarship(int Scholarship) {
+        this.Scholarship = Scholarship;
+    }
+
+    public void setAttendedClasses(int attendedClasses) {
+        this.attendedClasses = attendedClasses;
+    }
+
+    public void setMissedClasses(int missedClasses) {
+        this.missedClasses = missedClasses;
+    }
+
+    public double attendance() {
+        int allClasses = this.attendedClasses + this.missedClasses;
+        return this.attendedClasses / allClasses;
+    }
+
+}

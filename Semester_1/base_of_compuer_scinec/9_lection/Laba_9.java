@@ -38,7 +38,6 @@ public class Laba_9 {
 
         sсan.close();
 
-        // Пример удаления студента
         group.removeStudent(
                 new Student(20));
         group.removeStudent(
