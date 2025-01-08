@@ -40,7 +40,7 @@ public class Laba_10 {
         group.removeStudent(
                 new Student());
 
-        System.out.println(group.getGroup().get(0).getStudentInfo());
+        System.out.println(group.getGroup().getFirst().getStudentInfo());
         group.getInfo();
     }
 

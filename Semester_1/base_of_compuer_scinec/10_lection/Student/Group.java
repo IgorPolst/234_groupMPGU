@@ -6,15 +6,15 @@ public class Group {
 
     private int maxSize;
     private int minSize;
-    private List<Student> group;
+    private TreeSet<Student> group;
 
     public Group() {
         this.maxSize = 15;
         this.minSize = 3;
-        this.group = new ArrayList<Student>();
+        this.group = new TreeSet<Student>();
     }
 
-    public List<Student> getGroup() {
+    public TreeSet<Student> getGroup() {
 
         return group;
     }
@@ -193,10 +193,58 @@ public class Group {
     }
 
     public void getInfo() {
-        System.out.println("Имя         Фамилия     Возраст Номер");
+
         for (Student s : this.group) {
             System.out.printf("%-11s %-11s %-2d\n", s.getName(), s.getSurname(), s.getAge());
         }
+    }
+
+    public void printSortedGroup(){
+        
+    }
+
+    private static Comparator ComparatorSelector(int num) {
+        switch (num) {
+            case 1:
+                Comparator<Student> averageScoreComparator = new Comparator<Student>() {
+                    @Override
+                    public int compare(Student s1, Student s2) {
+                        return Double.compare(s1.getAverageScore(), s2.getAverageScore());
+                    }
+                };
+                return averageScoreComparator;
+                
+            case 2:
+                Comparator<Student> ageComparator = new Comparator<Student>() {
+                    @Override
+                    public int compare(Student s1, Student s2) {
+                        return Double.compare(s1.getAge(), s2.getAge());
+                    }
+                };
+
+                return ageComparator;
+            case 3:
+                Comparator<Student> scholarshipComparator = new Comparator<Student>() {
+                    @Override
+                    public int compare(Student s1, Student s2) {
+                        return Double.compare(s1.getScholarship(), s2.getScholarship());
+                    }
+                };
+
+                return scholarshipComparator;
+            case 4:
+                Comparator<Student> attendanceComparator = new Comparator<Student>() {
+                    @Override
+                    public int compare(Student s1, Student s2) {
+                        return Double.compare(s1.attendance(), s2.attendance());
+                    }
+                };
+
+                return attendanceComparator;
+            default:
+                throw new AssertionError();
+        }
+        
     }
 
     private static String readString(Scanner sc, String prompt) { // Проверка заполнения имени, фамилии и отчества без цифр

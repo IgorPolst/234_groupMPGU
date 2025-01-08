@@ -105,14 +105,6 @@ public class Student extends Group {
         return scholarship;
     }
 
-    public int getAttendedClasses() {
-        return attendedClasses;
-    }
-
-    public int getMissedClasses() {
-        return missedClasses;
-    }
-
     public void setScholarship(int scholarship) {
         this.scholarship = scholarship;
     }
