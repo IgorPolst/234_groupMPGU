@@ -40,19 +40,19 @@ public class Group {
     public void addStudent(Student student, int num) {
         try {
 
-            if (group.size() >= maxSize) {
+            if (this.group.size() >= maxSize) {
                 throw new IllegalStateException("Cannot add student: group is full.");
             } else if (student.getAge() >= 60 || student.getAge() <= 16) {
                 throw new IllegalStateException("Cannot add student: The student must be over 16 and under 60 years of age.");
             }
 
-            for (Student s : group) {
+            for (Student s : this.group) {
                 if (s.getNumber() == student.getNumber()) {
                     throw new IllegalStateException("Cannot add student: student " + student.getNumber() + " already exists in the group.");
                 }
             }
 
-            group.add(student);
+            this.group.add(student);
             System.out.println("Student " + student.getName() + " added to the group.");
 
         } catch (IllegalStateException e) {
@@ -64,12 +64,12 @@ public class Group {
 
     public void removeStudent(Student student) {
         try {
-            if (group.size() <= minSize) {
+            if (this.group.size() <= minSize) {
                 throw new IllegalStateException("Cannot remove student: group is empty.");
             }
 
             boolean studentFound = false;
-            for (Student s : group) {
+            for (Student s : this.group) {
                 if (s.getName().equals(student.getName())) {
                     studentFound = true;
                     break;
@@ -80,7 +80,7 @@ public class Group {
                 throw new IllegalStateException("Cannot remove student: student " + student.getName() + " is not in the group.");
             }
 
-            group.remove(student);
+            this.group.remove(student);
             System.out.println("Student " + student.getName() + " removed from the group.");
         } catch (IllegalStateException e) {
 

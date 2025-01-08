@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Laba_10 {
 
- public static void main(String[] args) {
+    public static void main(String[] args) {
         Group group = new Group();
 
         Scanner sсan = new Scanner(System.in);
@@ -30,7 +30,7 @@ public class Laba_10 {
             if (close) {
                 break;
             }
-            
+
         }
 
         sсan.close();
@@ -40,6 +40,7 @@ public class Laba_10 {
         group.removeStudent(
                 new Student());
 
+        System.out.println(group.getGroup().get(0).getStudentInfo());
         group.getInfo();
     }
 

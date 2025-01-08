@@ -27,7 +27,7 @@ public class Student extends Group {
     public Student() {
         this.scholarship = 2700;
         this.age = 18;
-        this.attendedClasses = 0;
+        this.attendedClasses = 10;
         this.averageScore = 5.4;
         this.gender = "male";
         this.midleName = "Stevenson";
@@ -119,7 +119,24 @@ public class Student extends Group {
 
     public double attendance() {
         int allClasses = this.attendedClasses + this.missedClasses;
-        return this.attendedClasses / allClasses;
+        double PercentageOfVisits;
+        try {
+            PercentageOfVisits = this.attendedClasses / allClasses;
+            
+        } catch (ArithmeticException e) {
+            System.out.println("Этот студнт не посетил и не пропустил ни одного занятия!");
+            return 0;
+        }        
+            return PercentageOfVisits; 
+
     }
 
+    public String getStudentInfo() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("ФИО").append(surname).append(name).append(midleName);
+        sb.append("\nПол: ").append(gender).append(",   Возраст: ").append(age);
+        sb.append("\nСредний балл: ").append(averageScore).append(", Стипендия: ").append(scholarship);
+        sb.append("\nПосещаемость: ").append(this.attendance()).append("%\n");
+        return sb.toString();
+    }
 }

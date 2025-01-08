@@ -14,134 +14,140 @@ public class Group {
         this.group = new ArrayList<Student>();
     }
 
+    public List<Student> getGroup() {
+
+        return group;
+    }
+
     public static Student generateStudent(boolean avtomatic) {
         Student def;
 
         if (avtomatic) {
             def = new Student();
-
-        } else {
-            def = new Student();
-
-            Scanner sc = new Scanner(System.in);
-
-            def.setName(readString(sc, "Введите имя: "));
-            def.setMidleName(readString(sc, "Введите отчество: "));
-            def.setSurname(readString(sc, "Введите фамилию: "));
-
-            int age = 0;
-            while (true) {
-                try {
-                    System.out.println("Введите возраст: ");
-                    age = sc.nextInt();
-                    if (age < 0) {
-                        throw new IllegalArgumentException("Возраст не может быть отрицательным. Повторите ввод.");
-                    }
-                    break;
-                } catch (InputMismatchException e) {
-                    System.out.println("Ошибка: Введите корректное число для возраста.");
-                    sc.next();
-                } catch (IllegalArgumentException e) {
-                    System.out.println(e.getMessage());
-                }
-            }
-            def.setAge(age);
-
-            int genderInput = -1;
-            while (true) {
-                try {
-                    System.out.println("Ваш пол м - 1 или ж - 0");
-                    genderInput = sc.nextInt();
-                    if (genderInput == 1) {
-                        def.setGender("male");
-                    } else if (genderInput == 0) {
-                        def.setGender("female");
-                    } else {
-                        throw new IllegalArgumentException("Введите 1 для мужского и 0 для женского пола.");
-                    }
-                    break;
-                } catch (InputMismatchException e) {
-                    System.out.println("Ошибка: Пожалуйста, введите 1 или 0.");
-                    sc.next();
-                } catch (IllegalArgumentException e) {
-                    System.out.println(e.getMessage());
-                }
-            }
-
-            int scholarship = 0;
-            while (true) {
-                try {
-                    System.out.println("Установите размер стипендии: ");
-                    scholarship = sc.nextInt();
-                    if (scholarship < 0) {
-                        throw new IllegalArgumentException("Размер стипендии не может быть отрицательным. Повторите ввод.");
-                    }
-                    break;
-                } catch (InputMismatchException e) {
-                    System.out.println("Ошибка: Введите корректное число для стипендии.");
-                    sc.next();
-                } catch (IllegalArgumentException e) {
-                    System.out.println(e.getMessage());
-                }
-            }
-            def.setScholarship(scholarship);
-
-            int attendedClasses = 0;
-            while (true) {
-                try {
-                    System.out.println("На скольких занятиях вы присутствовали: ");
-                    attendedClasses = sc.nextInt();
-                    if (attendedClasses < 0) {
-                        throw new IllegalArgumentException("Количество посещённых занятий не может быть отрицательным. Повторите ввод.");
-                    }
-                    break;
-                } catch (InputMismatchException e) {
-                    System.out.println("Ошибка: Введите корректное число для посещённых занятий.");
-                    sc.next();
-                } catch (IllegalArgumentException e) {
-                    System.out.println(e.getMessage());
-                }
-            }
-            def.setAttendedClasses(attendedClasses);
-
-            int missedClasses = 0;
-            while (true) {
-                try {
-                    System.out.println("Сколько занятий вы пропустили: ");
-                    missedClasses = sc.nextInt();
-                    if (missedClasses < 0) {
-                        throw new IllegalArgumentException("Количество пропущенных занятий не может быть отрицательным. Повторите ввод.");
-                    }
-                    break;
-                } catch (InputMismatchException e) {
-                    System.out.println("Ошибка: Введите корректное число для пропущенных занятий.");
-                    sc.next();
-                } catch (IllegalArgumentException e) {
-                    System.out.println(e.getMessage());
-                }
-            }
-            def.setMissedClasses(missedClasses);
-
+            return def;
         }
+
+        def = new Student();
+        Scanner sc = new Scanner(System.in);
+
+        def.setName(readString(sc, "Введите имя: "));
+        def.setMidleName(readString(sc, "Введите отчество: "));
+        def.setSurname(readString(sc, "Введите фамилию: "));
+
+        int age = 0;
+        while (true) {
+            try {
+                System.out.println("Введите возраст: ");
+                age = sc.nextInt();
+                if (age < 0) {
+                    throw new IllegalArgumentException("Возраст не может быть отрицательным. Повторите ввод.");
+                }
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Ошибка: Введите корректное число для возраста.");
+                sc.next();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        def.setAge(age);
+
+        int genderInput = -1;
+        while (true) {
+            try {
+                System.out.println("Ваш пол м - 1 или ж - 0");
+                genderInput = sc.nextInt();
+                if (genderInput == 1) {
+                    def.setGender("male");
+                } else if (genderInput == 0) {
+                    def.setGender("female");
+                } else {
+                    throw new IllegalArgumentException("Введите 1 для мужского и 0 для женского пола.");
+                }
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Ошибка: Пожалуйста, введите 1 или 0.");
+                sc.next();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        settingAverageScore(sc, def);
+
+        int scholarship = 0;
+        while (true) {
+            try {
+                System.out.println("Установите размер стипендии: ");
+                scholarship = sc.nextInt();
+                if (scholarship < 0) {
+                    throw new IllegalArgumentException("Размер стипендии не может быть отрицательным. Повторите ввод.");
+                }
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Ошибка: Введите корректное число для стипендии.");
+                sc.next();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        def.setScholarship(scholarship);
+
+        int attendedClasses = 0;
+        while (true) {
+            try {
+                System.out.println("На скольких занятиях вы присутствовали: ");
+                attendedClasses = sc.nextInt();
+                if (attendedClasses < 0) {
+                    throw new IllegalArgumentException("Количество посещённых занятий не может быть отрицательным. Повторите ввод.");
+                }
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Ошибка: Введите корректное число для посещённых занятий.");
+                sc.next();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        def.setAttendedClasses(attendedClasses);
+
+        int missedClasses = 0;
+        while (true) {
+            try {
+                System.out.println("Сколько занятий вы пропустили: ");
+                missedClasses = sc.nextInt();
+                if (missedClasses < 0) {
+                    throw new IllegalArgumentException("Количество пропущенных занятий не может быть отрицательным. Повторите ввод.");
+                }
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Ошибка: Введите корректное число для пропущенных занятий.");
+                sc.next();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        def.setMissedClasses(missedClasses);
+
         return def;
     }
 
     public void addStudent(Student student) {
         try {
 
-            if (group.size() >= maxSize) {
+            if (this.group.size() >= maxSize) {
                 throw new IllegalStateException("Cannot add student: group is full.");
             } else if (student.getAge() >= 60 || student.getAge() <= 16) {
                 throw new IllegalStateException("Cannot add student: The student must be over 16 and under 60 years of age.");
             }
 
-            for (Student s : group) {
+            for (Student s : this.group) {
                 if (s.getName().equals(student.getName())) {
                     throw new IllegalStateException("Cannot add student: student " + student.getName() + " already exists in the group.");
                 }
             }
 
-            group.add(student);
+            this.group.add(student);
             System.out.println("Student " + student.getName() + " added to the group.");
 
         } catch (IllegalStateException e) {
@@ -153,12 +159,12 @@ public class Group {
 
     public void removeStudent(Student student) {
         try {
-            if (group.size() <= minSize) {
+            if (this.group.size() <= minSize) {
                 throw new IllegalStateException("Cannot remove student: group is empty.");
             }
 
             boolean studentFound = false;
-            for (Student s : group) {
+            for (Student s : this.group) {
                 if (s.getName().equals(student.getName())) {
                     studentFound = true;
                     break;
@@ -169,7 +175,7 @@ public class Group {
                 throw new IllegalStateException("Cannot remove student: student " + student.getName() + " is not in the group.");
             }
 
-            group.remove(student);
+            this.group.remove(student);
             System.out.println("Student " + student.getName() + " removed from the group.");
         } catch (IllegalStateException e) {
 
@@ -177,8 +183,13 @@ public class Group {
         }
     }
 
-    public void changeRatingStudent(Student student){
+    public void changeRatingStudent(Student student) {
+        System.out.println("Введите новый средний балл студента: ");
+        Scanner sc = new Scanner(System.in);
+        settingAverageScore(sc, student);
+        sc.close();
     }
+
     public void getInfo() {
         System.out.println("Имя         Фамилия     Возраст Номер");
         for (Student s : this.group) {
@@ -186,7 +197,7 @@ public class Group {
         }
     }
 
-    private static String readString(Scanner sc, String prompt) {
+    private static String readString(Scanner sc, String prompt) { // Проверка заполнения имени, фамилии и отчества без цифр
         String input = "";
         boolean validInput = false;
 
@@ -207,4 +218,53 @@ public class Group {
         return input;
     }
 
+    private static void settingAverageScore(Scanner sc, Student def) {
+        double averageScore = sc.nextDouble();
+        while (true) {
+            System.out.print("Установите средний балл студента: ");
+            try {
+
+                if (averageScore < 0 || averageScore > 100) {
+                    throw new IllegalArgumentException("Ошибка: Средний балл должен быть в диапазоне от 0 до 100.");
+                }
+
+                def.setAverageScore(averageScore);
+                System.out.println("Средний балл установлен: " + def.getAverageScore());
+                break;
+
+            } catch (IllegalArgumentException e) {
+                System.err.println(e.getMessage());
+            } catch (InputMismatchException e) {
+                System.out.println("Ошибка: Введите корректное число для возраста.");
+                sc.next();
+            }
+        }
+    }
+
+    public Student findeStudent() { // Поиск студентов по имени
+        Student rightStudent = null;
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            boolean found = false;
+            try {
+                String name = readString(sc, "Введите имя студента: ");
+                for (Student s : this.group) {
+                    if (s.getName().equals(name)) {
+                        rightStudent = s;
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    throw new IllegalArgumentException("Студента с таким именем в этой группе не существует!");
+                }
+                break;
+
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return rightStudent;
+    }
 }
