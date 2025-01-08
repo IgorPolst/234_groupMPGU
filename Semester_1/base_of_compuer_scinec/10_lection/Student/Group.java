@@ -75,59 +75,11 @@ public class Group {
 
         settingAverageScore(sc, def);
 
-        int scholarship = 0;
-        while (true) {
-            try {
-                System.out.println("Установите размер стипендии: ");
-                scholarship = sc.nextInt();
-                if (scholarship < 0) {
-                    throw new IllegalArgumentException("Размер стипендии не может быть отрицательным. Повторите ввод.");
-                }
-                break;
-            } catch (InputMismatchException e) {
-                System.out.println("Ошибка: Введите корректное число для стипендии.");
-                sc.next();
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        def.setScholarship(scholarship);
+        settingScholarship(sc, def);
 
-        int attendedClasses = 0;
-        while (true) {
-            try {
-                System.out.println("На скольких занятиях вы присутствовали: ");
-                attendedClasses = sc.nextInt();
-                if (attendedClasses < 0) {
-                    throw new IllegalArgumentException("Количество посещённых занятий не может быть отрицательным. Повторите ввод.");
-                }
-                break;
-            } catch (InputMismatchException e) {
-                System.out.println("Ошибка: Введите корректное число для посещённых занятий.");
-                sc.next();
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        def.setAttendedClasses(attendedClasses);
+        settingAttendedClasses(sc, def);
 
-        int missedClasses = 0;
-        while (true) {
-            try {
-                System.out.println("Сколько занятий вы пропустили: ");
-                missedClasses = sc.nextInt();
-                if (missedClasses < 0) {
-                    throw new IllegalArgumentException("Количество пропущенных занятий не может быть отрицательным. Повторите ввод.");
-                }
-                break;
-            } catch (InputMismatchException e) {
-                System.out.println("Ошибка: Введите корректное число для пропущенных занятий.");
-                sc.next();
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        def.setMissedClasses(missedClasses);
+        settingMissedClasses(sc, def);
 
         return def;
     }
@@ -183,11 +135,61 @@ public class Group {
         }
     }
 
+    public Student findeStudent() { // Поиск студентов по имени
+        Student rightStudent = null;
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            boolean found = false;
+            try {
+                String name = readString(sc, "Введите имя студента: ");
+                for (Student s : this.group) {
+                    if (s.getName().equals(name)) {
+                        rightStudent = s;
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    throw new IllegalArgumentException("Студента с таким именем в этой группе не существует!");
+                }
+                break;
+
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return rightStudent;
+    }
+
     public void changeRatingStudent(Student student) {
         System.out.println("Введите новый средний балл студента: ");
         Scanner sc = new Scanner(System.in);
         settingAverageScore(sc, student);
         sc.close();
+    }
+
+    public void changeScholarship(Student student) {
+        System.out.println("Введите новый размер стипендии: ");
+        Scanner sc = new Scanner(System.in);
+        settingAverageScore(sc, student);
+        sc.close();
+    }
+
+    public void addAttendedlasses(Student student) {
+        int previousVisits = student.getAttendedClasses();
+        Scanner sc = new Scanner(System.in);
+        settingAttendedClasses(sc, student);
+        int newVisit = student.getAttendedClasses();
+        student.setAttendedClasses(previousVisits + newVisit);
+    }
+
+    public void addMissedClasses(Student student) {
+        int previousMissed = student.getAttendedClasses();
+        Scanner sc = new Scanner(System.in);
+        settingMissedClasses(sc, student);
+        int newMiss = student.getAttendedClasses();
+        student.setAttendedClasses(previousMissed + newMiss);
     }
 
     public void getInfo() {
@@ -241,30 +243,63 @@ public class Group {
         }
     }
 
-    public Student findeStudent() { // Поиск студентов по имени
-        Student rightStudent = null;
-        Scanner sc = new Scanner(System.in);
-
+    private static void settingScholarship(Scanner sc, Student def) {
+        int scholarship = 0;
         while (true) {
-            boolean found = false;
             try {
-                String name = readString(sc, "Введите имя студента: ");
-                for (Student s : this.group) {
-                    if (s.getName().equals(name)) {
-                        rightStudent = s;
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    throw new IllegalArgumentException("Студента с таким именем в этой группе не существует!");
+                System.out.println("Установите размер стипендии: ");
+                scholarship = sc.nextInt();
+                if (scholarship < 0) {
+                    throw new IllegalArgumentException("Размер стипендии не может быть отрицательным. Повторите ввод.");
                 }
                 break;
-
+            } catch (InputMismatchException e) {
+                System.out.println("Ошибка: Введите корректное число для стипендии.");
+                sc.next();
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
-        return rightStudent;
+        def.setScholarship(scholarship);
+    }
+
+    private static void settingAttendedClasses(Scanner sc, Student def) {
+        int attendedClasses = 0;
+        while (true) {
+            try {
+                System.out.println("На скольких занятиях вы присутствовали: ");
+                attendedClasses = sc.nextInt();
+                if (attendedClasses < 0) {
+                    throw new IllegalArgumentException("Количество посещённых занятий не может быть отрицательным. Повторите ввод.");
+                }
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Ошибка: Введите корректное число для посещённых занятий.");
+                sc.next();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        def.setAttendedClasses(attendedClasses);
+    }
+
+    private static void settingMissedClasses(Scanner sc, Student def) {
+        int missedClasses = 0;
+        while (true) {
+            try {
+                System.out.println("Сколько занятий вы пропустили: ");
+                missedClasses = sc.nextInt();
+                if (missedClasses < 0) {
+                    throw new IllegalArgumentException("Количество пропущенных занятий не может быть отрицательным. Повторите ввод.");
+                }
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Ошибка: Введите корректное число для пропущенных занятий.");
+                sc.next();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        def.setMissedClasses(missedClasses);
     }
 }
