@@ -1,6 +1,6 @@
 package Student;
 
-public class Student {
+public class Student extends Group {
 
     String midleName;
     String name;
@@ -8,12 +8,12 @@ public class Student {
     String gender;
     int age;
     double averageScore;
-    int Scholarship;
+    int scholarship;
     int attendedClasses;
     int missedClasses;
 
-    public Student(String midleName, String name, String surname, String gender, int age, double averageScore, int Scholarship, int attendedClasses, int missedClasses) {
-        this.Scholarship = Scholarship;
+    public Student(String midleName, String name, String surname, String gender, int age, double averageScore, int scholarship, int attendedClasses, int missedClasses) {
+        this.scholarship = scholarship;
         this.age = age;
         this.attendedClasses = attendedClasses;
         this.averageScore = averageScore;
@@ -25,7 +25,7 @@ public class Student {
     }
 
     public Student() {
-        this.Scholarship = 2700;
+        this.scholarship = 2700;
         this.age = 18;
         this.attendedClasses = 0;
         this.averageScore = 5.4;
@@ -46,7 +46,7 @@ public class Student {
         sb.append(", gender=").append(gender);
         sb.append(", age=").append(age);
         sb.append(", averageScore=").append(averageScore);
-        sb.append(", Scholarship=").append(Scholarship);
+        sb.append(", scholarship=").append(scholarship);
         sb.append(", attendedClasses=").append(attendedClasses);
         sb.append(", missedClasses=").append(missedClasses);
         sb.append('}');
@@ -102,11 +102,11 @@ public class Student {
     }
 
     public int getScholarship() {
-        return Scholarship;
+        return scholarship;
     }
 
-    public void setScholarship(int Scholarship) {
-        this.Scholarship = Scholarship;
+    public void setScholarship(int scholarship) {
+        this.scholarship = scholarship;
     }
 
     public void setAttendedClasses(int attendedClasses) {
