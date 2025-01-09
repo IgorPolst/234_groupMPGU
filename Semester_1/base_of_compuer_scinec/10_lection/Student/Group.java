@@ -11,7 +11,7 @@ public class Group {
     public Group() {
         this.maxSize = 15;
         this.minSize = 3;
-        this.group = new TreeSet<Student>();
+        this.group = new TreeSet<Student>((s1, s2) -> s1.getName().compareTo(s2.getName()));
     }
 
     public TreeSet<Student> getGroup() {
@@ -86,19 +86,16 @@ public class Group {
 
     public void addStudent(Student student) {
         try {
-
             if (this.group.size() >= maxSize) {
                 throw new IllegalStateException("Cannot add student: group is full.");
             } else if (student.getAge() >= 60 || student.getAge() <= 16) {
                 throw new IllegalStateException("Cannot add student: The student must be over 16 and under 60 years of age.");
             }
-
             for (Student s : this.group) {
                 if (s.getName().equals(student.getName())) {
                     throw new IllegalStateException("Cannot add student: student " + student.getName() + " already exists in the group.");
                 }
             }
-
             this.group.add(student);
             System.out.println("Student " + student.getName() + " added to the group.");
 
@@ -114,7 +111,6 @@ public class Group {
             if (this.group.size() <= minSize) {
                 throw new IllegalStateException("Cannot remove student: group is empty.");
             }
-
             boolean studentFound = false;
             for (Student s : this.group) {
                 if (s.getName().equals(student.getName())) {
@@ -122,7 +118,6 @@ public class Group {
                     break;
                 }
             }
-
             if (!studentFound) {
                 throw new IllegalStateException("Cannot remove student: student " + student.getName() + " is not in the group.");
             }
@@ -135,7 +130,7 @@ public class Group {
         }
     }
 
-    public Student findeStudent() { // Поиск студентов по имени
+    public Student findStudent() { // Поиск студентов по имени
         Student rightStudent = null;
         Scanner sc = new Scanner(System.in);
 
@@ -150,10 +145,12 @@ public class Group {
                         break;
                     }
                 }
+
                 if (!found) {
                     throw new IllegalArgumentException("Студента с таким именем в этой группе не существует!");
+                } else {
+                    break;
                 }
-                break;
 
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -162,21 +159,19 @@ public class Group {
         return rightStudent;
     }
 
-    public void changeRatingStudent(Student student) {
-        System.out.println("Введите новый средний балл студента: ");
+    public static void changeRatingStudent(Student student) {
         Scanner sc = new Scanner(System.in);
         settingAverageScore(sc, student);
-        sc.close();
+
     }
 
-    public void changeScholarship(Student student) {
-        System.out.println("Введите новый размер стипендии: ");
+    public static void changeScholarship(Student student) {
         Scanner sc = new Scanner(System.in);
-        settingAverageScore(sc, student);
-        sc.close();
+        settingScholarship(sc, student);
+
     }
 
-    public void addAttendedlasses(Student student) {
+    public static void addAttendedlasses(Student student) {
         int previousVisits = student.getAttendedClasses();
         Scanner sc = new Scanner(System.in);
         settingAttendedClasses(sc, student);
@@ -184,7 +179,7 @@ public class Group {
         student.setAttendedClasses(previousVisits + newVisit);
     }
 
-    public void addMissedClasses(Student student) {
+    public static void addMissedClasses(Student student) {
         int previousMissed = student.getAttendedClasses();
         Scanner sc = new Scanner(System.in);
         settingMissedClasses(sc, student);
@@ -192,15 +187,51 @@ public class Group {
         student.setAttendedClasses(previousMissed + newMiss);
     }
 
-    public void getInfo() {
-
-        for (Student s : this.group) {
-            System.out.printf("%-11s %-11s %-2d\n", s.getName(), s.getSurname(), s.getAge());
+    public static void getGroupInfo(Collection<Student> group) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Возраст\t Пол\t Балл\t Стипендия\t Посещаемость\t ФИО\n");
+        for (Student s : group) {
+            sb.append(s.getAge()).append("\t");
+            sb.append(" ").append(s.getGender()).append("\t");
+            sb.append(" ").append(s.getAverageScore()).append("\t");
+            sb.append(" ").append(s.getScholarship()).append("\t\t");
+            sb.append(" ").append(String.format("%.2f",s.attendance())).append("%\t");
+            sb.append(s.getSurname()).append(" ").append(s.getName()).append(" ").append(s.getMidleName()).append("\n");
         }
+        System.out.println(sb.toString());
     }
 
-    public void printSortedGroup(){
-        
+    public void printSortedGroup() {
+        int flag = 0;
+
+        if (this.group.size() == 0) {
+            System.out.println("В групее пока нет ни одного студента!");;
+            return;
+        }
+
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+
+            System.out.println("Выберите метод сортировки:\n По среднемк баллу - 1 По возрасту - 2 По стипендии - 3 По посещамоти - 4");
+            try {
+                flag = sc.nextInt();
+                if (flag < 1 || flag > 4) {
+                    throw new IllegalArgumentException("Ошибка: Выберите один из предложенных вариантов");
+                }
+
+                TreeSet<Student> sortGroup = new TreeSet<Student>(ComparatorSelector(flag));
+                sortGroup.addAll(this.group);
+                getGroupInfo(sortGroup);
+                break;
+
+            } catch (IllegalArgumentException e) {
+                System.err.println(e.getMessage());
+            } catch (InputMismatchException e) {
+                System.out.println("Ошибка: Введите корректное число для возраста.");
+                sc.next();
+            }
+        }
+
     }
 
     private static Comparator ComparatorSelector(int num) {
@@ -213,12 +244,12 @@ public class Group {
                     }
                 };
                 return averageScoreComparator;
-                
+
             case 2:
                 Comparator<Student> ageComparator = new Comparator<Student>() {
                     @Override
                     public int compare(Student s1, Student s2) {
-                        return Double.compare(s1.getAge(), s2.getAge());
+                        return Integer.compare(s1.getAge(), s2.getAge());
                     }
                 };
 
@@ -227,7 +258,7 @@ public class Group {
                 Comparator<Student> scholarshipComparator = new Comparator<Student>() {
                     @Override
                     public int compare(Student s1, Student s2) {
-                        return Double.compare(s1.getScholarship(), s2.getScholarship());
+                        return Integer.compare(s1.getScholarship(), s2.getScholarship());
                     }
                 };
 
@@ -244,7 +275,7 @@ public class Group {
             default:
                 throw new AssertionError();
         }
-        
+
     }
 
     private static String readString(Scanner sc, String prompt) { // Проверка заполнения имени, фамилии и отчества без цифр
@@ -269,9 +300,9 @@ public class Group {
     }
 
     private static void settingAverageScore(Scanner sc, Student def) {
-        double averageScore = sc.nextDouble();
         while (true) {
             System.out.print("Установите средний балл студента: ");
+            double averageScore = sc.nextDouble();
             try {
 
                 if (averageScore < 0 || averageScore > 100) {
@@ -285,7 +316,7 @@ public class Group {
             } catch (IllegalArgumentException e) {
                 System.err.println(e.getMessage());
             } catch (InputMismatchException e) {
-                System.out.println("Ошибка: Введите корректное число для возраста.");
+                System.out.println("Ошибка: Введите корректное число для среднего балла.");
                 sc.next();
             }
         }

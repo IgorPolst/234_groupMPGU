@@ -117,11 +117,19 @@ public class Student extends Group {
         this.missedClasses = missedClasses;
     }
 
+    public int getAttendedClasses() {
+        return attendedClasses;
+    }
+
+    public int getMissedClasses() {
+        return missedClasses;
+    }
+
     public double attendance() {
-        int allClasses = this.attendedClasses + this.missedClasses;
+        double allClasses = this.getAttendedClasses() + this.getMissedClasses();
         double PercentageOfVisits;
         try {
-            PercentageOfVisits = this.attendedClasses / allClasses;
+            PercentageOfVisits = this.getAttendedClasses() / allClasses * 100;
             
         } catch (ArithmeticException e) {
             System.out.println("Этот студнт не посетил и не пропустил ни одного занятия!");
@@ -131,14 +139,17 @@ public class Student extends Group {
 
     }
 
-    public String getStudentInfo() {
+    public void getStudentInfo() {
+
         StringBuilder sb = new StringBuilder();
-        sb.append("ФИО").append(surname).append(name).append(midleName);
+        sb.append("ФИО\t").append(surname).append(" ").append(name).append(" ").append(midleName);
         sb.append("\nПол: ").append(gender).append(",   Возраст: ").append(age);
         sb.append("\nСредний балл: ").append(averageScore).append(", Стипендия: ").append(scholarship);
-        sb.append("\nПосещаемость: ").append(this.attendance()).append("%\n");
-        return sb.toString();
+        sb.append("\nПосещаемость: ").append(String.format("%.2f", attendance())).append("%\n");
+        System.out.println(sb.toString());
     }
+
+
 
 
 }
