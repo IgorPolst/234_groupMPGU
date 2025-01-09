@@ -96,6 +96,10 @@ public class Group {
                     throw new IllegalStateException("Cannot add student: student " + student.getName() + " already exists in the group.");
                 }
             }
+            if (student.getName().equals("Алексей") && student.getSurname().equals("Белоусов") && student.getMidleName().equals("Юрбевич")) {
+                throw new IllegalStateException("Алексей Юрьевич, вам уже сюда нельзя!");
+
+            }
             this.group.add(student);
             System.out.println("Student " + student.getName() + " added to the group.");
 
@@ -195,7 +199,7 @@ public class Group {
             sb.append(" ").append(s.getGender()).append("\t");
             sb.append(" ").append(s.getAverageScore()).append("\t");
             sb.append(" ").append(s.getScholarship()).append("\t\t");
-            sb.append(" ").append(String.format("%.2f",s.attendance())).append("%\t");
+            sb.append(" ").append(String.format("%.2f", s.attendance())).append("%\t");
             sb.append(s.getSurname()).append(" ").append(s.getName()).append(" ").append(s.getMidleName()).append("\n");
         }
         System.out.println(sb.toString());
