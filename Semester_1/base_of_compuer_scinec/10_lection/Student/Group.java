@@ -99,6 +99,7 @@ public class Group {
             if (student.getName().equals("Алексей") && student.getSurname().equals("Белоусов") && student.getMidleName().equals("Юрбевич")) {
                 throw new IllegalStateException("Алексей Юрьевич, вам уже сюда нельзя!");
 
+
             }
             this.group.add(student);
             System.out.println("Student " + student.getName() + " added to the group.");
