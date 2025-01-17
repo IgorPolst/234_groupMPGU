@@ -24,6 +24,7 @@ public class Laba_10 {
                 }
 
             } catch (IllegalArgumentException e) {
+                
                 System.err.println(e.getMessage());
             } catch (InputMismatchException e) {
                 System.out.println("Ошибка: Введите корректное число для возраста.");
@@ -32,11 +33,14 @@ public class Laba_10 {
 
         }
 
+        
+
         sc.close();
     }
 
     public static void printMenu() {
         StringBuilder sb = new StringBuilder();
+        sb.
 
         sb.append("Здравствуйте! Выберите один из пунктов меню:\n");
         sb.append("0 - Добавить студента созданного автоматически;\n");
