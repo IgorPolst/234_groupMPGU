@@ -36,6 +36,14 @@ let currentTool = 'pen';
         strokeWeight(brushThickness);
         line(mouseX, mouseY, pmouseX, pmouseY);
       }
+      // line(50, 50, 100, 100);
+      // saveCanvas("test2.2", "png");
+      
+      // const boundingBox = canvas.boundingBox();
+      // const startX = boundingBox.x + 50;
+      // const startY = boundingBox.y + 50;
+
+      // line(startX, startY, startX+100, startY+100);
 
     }
 

@@ -1,4 +1,5 @@
 {
     "editor.formatOnPaste": true,
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    "editor.defaultFormatter": "vscode.typescript-language-features",
+    "notebook.defaultFormatter": "vscode.typescript-language-features"
 }
