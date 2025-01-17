@@ -20,7 +20,7 @@ test.describe('Drawing App Tests', () => {
     });
 
     test('should allow drawing with the pen tool', async ({ page }) => {
-        const canvas = await page.locator('canvas');
+        const canvas = page.locator('canvas');
         await expect(canvas).toBeVisible();
 
         const boundingBox = await canvas.boundingBox();
@@ -38,9 +38,9 @@ test.describe('Drawing App Tests', () => {
     });
 
     test('should allow changing brush color and thickness', async ({ page }) => {
-        const canvas = await page.locator('canvas');
-        const colorPicker = await page.locator('#colorPicker');
-        const thicknessSlider = await page.locator('#thicknessSlider');
+        const canvas = page.locator('canvas');
+        const colorPicker =  page.locator('#colorPicker');
+        const thicknessSlider =  page.locator('#thicknessSlider');
 
         await expect(colorPicker).toBeVisible();
         await colorPicker.fill('#ff0000');
@@ -65,8 +65,8 @@ test.describe('Drawing App Tests', () => {
     });
 
     test('should allow clearing the canvas', async ({ page }) => {
-        const canvas = await page.locator('canvas');
-        const clearButton = await page.locator('#clearCanvas');
+        const canvas = page.locator('canvas');
+        const clearButton = page.locator('#clearCanvas');
 
 
         const boundingBox = await canvas.boundingBox();
@@ -83,16 +83,14 @@ test.describe('Drawing App Tests', () => {
 
         const screenshot = await canvas.screenshot();
         fs.writeFileSync('tests/result/test4.png', screenshot);
-        expect(await compareImages("tests/result/test4.png",await choseSize("tests/result/test4.png", 4))).toBeTruthy();
+        expect(await compareImages("tests/result/test4.png", choseSize("tests/result/test4.png", 4))).toBeTruthy();
     });
 
-    async function choseSize(path, num) {
-        const info = await loadImage(path);
+    function choseSize(path, num) {
+        const info = loadImage(path);
         let testPath = null;
-        console.log("Bob");
         if (info.width === 2560) {
             testPath = 'tests/sources/2560x1240/test' + num + '.png';
-            console.log("Bob");
         } else {
             testPath = 'tests/sources/1280x620/test' + num + '.png';
         }
@@ -103,9 +101,9 @@ test.describe('Drawing App Tests', () => {
     async function loadImage(path) {
         const { data, info } = await sharp(path)
             .raw()
-            .ensureAlpha() // Убедитесь, что альфа-канал добавляется
+            .ensureAlpha() 
             .toBuffer({ resolveWithObject: true });
-        return { data, info }; // Убедитесь, что вы возвращаете правильные данные
+        return { data, info }; 
     }
 
     async function compareImages(imagePath1, imagePath2) {
@@ -113,18 +111,13 @@ test.describe('Drawing App Tests', () => {
         const { data: img2Data, info: img2Info } = await loadImage(imagePath2);
 
 
-        // Проверяем размеры изображений
         if (img1Info.width !== img2Info.width || img1Info.height !== img2Info.height) {
             console.log(`Размеры изображений: ${img1Info.width}x${img1Info.height} и ${img2Info.width}x${img2Info.height}`);
             throw new Error('Изображения имеют разные размеры и не могут быть сравнены.');
         }
 
-
-        // Сравниваем изображения
-        console.log(`Размеры изображений: ${img1Info.width}x${img1Info.height} и ${img2Info.width}x${img2Info.height}`);
         const numDiffPixels = pixelmatch(img1Data, img2Data, null, img1Info.width, img1Info.height, { threshold: 0.1 });
 
-        // Возвращаем bool, указывающий на наличие отличий
         return numDiffPixels === 0;
     }
 
